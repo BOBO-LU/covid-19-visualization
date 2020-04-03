@@ -16,5 +16,5 @@ def getException(e):
     errMsg = "File \"{}\", line {}, in {}: [{}] {}".format(fileName, lineNum, funcName, error_class, detail)
     print(errMsg)
 
-# if __name__ == '__main__':
-#     pass
+if __name__ == '__main__':
+    pass

@@ -5,8 +5,15 @@ import matplotlib
 import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 import matplotlib.animation as animation    
+import os
+import sys
+CURRENT_DIR = os.path.dirname(__file__)
+PARENT_DIR = os.path.dirname(CURRENT_DIR)
+sys.path.append(PARENT_DIR)
 
-from .. import trace
+from trace import *
+
+
 plt.rcParams['animation.ffmpeg_path'] = 'C:\\ffmpeg\\bin\\ffmpeg.exe'
 
 def augment(xold,yold,numsteps):
@@ -38,7 +45,8 @@ def smoothListGaussian(listin,strippedXs=False,degree=10):
     return smoothed
 
 
-overdoses = pd.read_excel('\\datas\\overdose_data_1999-2015.xls',sheet_name='Online',skiprows =6)
+overdoses = pd.read_excel('datas\\overdose_data_1999-2015.xls',sheet_name='Online',skiprows =6)
+
 def get_data(table,rownum,title):
     data = pd.DataFrame(table.loc[rownum][2:]).astype(float)
     data.columns = {title}
