@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from datetime import datetime
+import trace
 
 CURRENT_DIR = os.path.dirname(__file__)
 POPULATION_CSV_PATH = os.path.join(CURRENT_DIR, '../input/un/population_2020.csv')
@@ -126,9 +127,13 @@ def inject_days_since_all(df):
     ])
 
 def _apply_row_cfr_100(row):
-    if pd.notnull(row['total_cases']) and row['total_cases'] >= 100:
-        return row['cfr']
-    return pd.NA
+    try:
+        if pd.notnull(row['total_cases']) and row['total_cases'] >= 100:
+            return row['cfr']
+        print('\npd.NA\n')
+        return pd.NA
+    except Exception as e:
+        trace.getException(e)
 
 def inject_cfr(df):
     df = df.copy()

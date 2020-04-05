@@ -58,6 +58,7 @@ def load_data(filename):
     try:
         print('start load_data %s'% colored("debug", 'blue'))
         df = read_file(filename)
+        print("filename:%s"  % colored(filename, 'cyan'))
         # set to ints
         df['cases'] = df['cases'].astype("Int64")
         df['deaths'] = df['deaths'].astype("Int64")
