@@ -131,7 +131,7 @@ def _apply_row_cfr_100(row):
         if pd.notnull(row['total_cases']) and row['total_cases'] >= 100:
             return row['cfr']
         print('\npd.NA\n')
-        return pd.NA
+        return pd.notna
     except Exception as e:
         trace.getException(e)
 

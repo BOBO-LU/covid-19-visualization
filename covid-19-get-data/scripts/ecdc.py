@@ -51,7 +51,8 @@ def read_file(filename):
         return pd.read_excel(
             filepath,
             # Namibia has 'NA' 2-letter code, we don't want that to be <NA>
-            keep_default_na=False
+            keep_default_na=False,
+            engine='python'
         )
 
 def load_data(filename):

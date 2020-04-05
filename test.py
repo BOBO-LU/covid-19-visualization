@@ -59,6 +59,11 @@ def load_data(filepath="covid-19-get-data\\public\\data\\ecdc\\full_data.csv"):
         encoding="UTF-8",
         engine='python'
     )
+    for i in range(df['date'].shape[0]):
+        #print(df.at[i,'date'])
+        df.at[i,'date']=date2num(datetime.strptime(df['date'][i],'%Y-%m-%d'))
+
+
     df = df.set_index('location')
     df = df.loc[country]
     print(df.describe)
@@ -77,6 +82,7 @@ def data_filter(df, data_field='new_cases'):
     case_data = []
 
     df = df.filter(items=['date',data_field])
+        
 
     for i , element in enumerate(country):
         temp_df = df.loc[element]
@@ -89,7 +95,7 @@ def data_filter(df, data_field='new_cases'):
 def main():
 
     #產生畫布
-    fig = plt.figure()
+    fig = plt.figure(figsize=(15,6),dpi=150)
     ax = plt.axes([0.1, 0.1, 0.6, 0.75], ylim = (1,10000))
     plt.yscale("log")
 
