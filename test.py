@@ -23,7 +23,7 @@ country = ['Taiwan',
            'United States',
            'World'] #can read data from country standard
 
-colors = ['#1f77b4',
+colors = ['#000000',
           '#ff7f0e',
           '#2ca02c',
           '#d62728',
@@ -42,7 +42,7 @@ mpl.rcParams['axes.prop_cycle'] = cycler(color=colors)
 xdata, ydata = [], []
 lines = []
 
-def load_data(filepath="covid-19-get-data\\public\\data\\ecdc\\full_data.csv"):
+def load_data(filepath="covid-19-data\\public\\data\\ecdc\\full_data.csv"):
     """取得csv檔裡面的數據，轉換成dataframe，使用location當作index，過濾country的部分
 
     Parameters:
@@ -69,7 +69,7 @@ def load_data(filepath="covid-19-get-data\\public\\data\\ecdc\\full_data.csv"):
     print(df.describe)
     return df 
 
-def data_filter(df, data_field='new_cases'):
+def data_filter(df, data_field='total_cases'):
     """取得要的欄位，轉成List
     Parameters:
     df (dataframe): country index 過濾地點後的資料
@@ -95,8 +95,8 @@ def data_filter(df, data_field='new_cases'):
 def main():
 
     #產生畫布
-    fig = plt.figure(figsize=(15,6),dpi=150)
-    ax = plt.axes([0.1, 0.1, 0.6, 0.75], ylim = (1,10000))
+    fig = plt.figure(figsize=(15,6),dpi=50)
+    ax = plt.axes([0.1, 0.1, 0.6, 0.75], ylim = (1,500000))
     plt.yscale("log")
 
     #設定線條
@@ -121,7 +121,7 @@ def main():
 
     #設定標籤
     plt.xlabel('date')
-    plt.ylabel('cases')
+    plt.ylabel('total_cases')
     
             
 
@@ -149,6 +149,7 @@ def main():
 
 
     def animate(i):
+        
         xdata = []
         ydata = []
         print('animate')
@@ -175,7 +176,7 @@ def main():
         
         return lines
 
-    ani = animation.FuncAnimation(fig, animate, init_func=init, blit=False, interval=10, repeat=False)
+    ani = animation.FuncAnimation(fig, animate, init_func=init, blit=False, interval=10, repeat=True)
     plt.show()
 
 
